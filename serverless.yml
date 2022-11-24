@@ -1,0 +1,24 @@
+service: tooling-s3-sqs
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: hello
+          method: get
+
+
+plugins:
+  - serverless-localstack
+  - serverless-offline
+  - serverless-mocha-plugin
+
+custom:
+  serverless-offline:
+    useChildProcesses: true
